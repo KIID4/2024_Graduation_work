@@ -1,0 +1,11 @@
+[Unit]
+Description=network & device owner check service
+
+[Service]
+User=<사용자명>
+WorkingDirectory=/home/<사용자명>/pansy/qr-scanner
+Environment="PATH=/home/<사용자명>/pansy/bin"
+ExecStart=/home/<사용자명>/pansy/bin/python3 -u run.py
+
+[Install]
+WantedBy=multi-user.target

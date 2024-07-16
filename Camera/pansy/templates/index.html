@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bi 웹캠 스트리밍</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;521&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="main-container">
+      <div class="background">
+        <div class="live-streaming-user">
+          <span class="main-user-name">{{user_name}}</span>
+          <span class="live-streaming">&nbsp;‘s Live Streaming</span>
+        </div>
+
+        {#<!-- <img class="streaming-screen" src= {% if is_recording == False %}
+        "{{url_for('static', filename='assets/images/writing1.gif')}}" {% else
+        %} "{{url_for('video_feed.streaming') }}" {% endif %} width="100%" /> -->#}
+        <img
+          class="streaming-screen"
+          src="{{url_for('video_feed.streaming')}}"
+          width="100%"
+        />
+
+        <div class="flex-row-eb" id="record_buttons">
+          {% if is_recording == True %}
+          <div class="record-stop-box">
+            <a
+              href="{{ url_for('stop_rec.stop_recording') }}"
+              class="record-stop"
+            >
+              녹화 중지
+            </a>
+          </div>
+          {% endif %} {% if is_recording == None %}
+          <div class="record-start-box">
+            <a
+              href="{{ url_for('start_rec.start_recording') }}"
+              class="record-start"
+            >
+              녹화 시작
+            </a>
+          </div>
+          {% else %} {% if is_recording == True %}
+          <div class="rec-box">
+            <span class="rec"> REC </span>
+            <div class="rec-icon"></div>
+          </div>
+          {#{% else %}
+          <div class="wri-box">
+            <span class="wri"> WRI </span>
+            <div class="wri-icon"></div>
+          </div>
+          #} {% endif %} {% endif %}
+        </div>
+        <div class="divider"></div>
+        <div class="user-name">
+          <span class="user-name-label"> UserName: </span>
+          <span class="user-name-1">&nbsp;{{user_name}} </span>
+        </div>
+
+        <div class="start-time">
+          <span class="recording-start-time">Recording Start Time: </span>
+          <span class="date-time"
+            >&nbsp; {% if start_rec_time %} {{ start_rec_time.strftime("%Y/%m/%d
+            - %H시 %M분 %S초") }} {% else %} -- {% endif %}
+          </span>
+        </div>
+        <div class="duration">
+          <span class="recording-duration">Recording Duration: </span>
+          <span class="time"
+            >&nbsp; {% if duration %} {{ duration[:2] }}:{{ duration[2:4] }}:{{
+            duration[4:] }} {% else %} -- {% endif %}
+          </span>
+        </div>
+        <div class="separator"></div>
+        <div class="file-name">
+          <span class="saved-file-name-header">Saved FileName: </span>
+          <span class="saved-file-name">&nbsp;{{file_name}}</span>
+        </div>
+        {#<!-- {% if writing_status %}
+        <div class="writing-status">{{writing_status}}</div>
+        {% endif %} -->#}
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+{% extends "./bases/home.html" %}
+
+
+<!-- title -->
+{% block title %}Lavender - dashboard{% endblock %}
+
+
+<!-- breadcrumb -->
+{% block breadcrumb %}
+<li aria-label="nav-item breadcrumb">
+  <ol class="nav-link breadcrumb m-auto">
+    <li class="breadcrumb-item pe-none">
+      <a href="#" class="text-decoration-none text-light">Menu</a>
+    </li>
+    <li class="dropdown breadcrumb-item active">
+      <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-light">Dashboard</a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><a class="dropdown-item" href="/devices">Cam-Control</a></li>
+      </ul>
+    </li>
+  </ol>
+</li>
+{% endblock %}
+
+
+<!-- content -->
+{% block content %}
+<div class="py-3 vh-100 d-flex gap-3 flex-column overflow-hidden">
+  <div class="row gap-4 px-3 px-md-3 justify-content-around">
+    <!-- 전체 경기 평균 그래프 카드 -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">전체 경기 평균</h5>
+          {# <p class="card-text">*총 경기 수: {basketball_play_counts}</p> #}
+          <img src="data:image/jpeg;base64,{{ first_card_graph }}" alt="전체 경기 평균 그래프">
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 경기 기록 테이블 카드 -->
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          {# <!-- 검색하기 -->
+          <div class="input-group justify-content-end">
+            <input type="search" id="play-search" class="form-control" placeholder="yyyy-mm-dd HH:MM:SS" />
+            <button type="button" class="btn btn-dark">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-search form-control-feedback" viewBox="0 0 16 16">
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+              </svg>
+            </button>
+          </div> #}
+
+          <!-- 경기 선택 테이블 -->
+          <table class="table table-hover mb-0 mt-3">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" hidden>video_num</th>
+                {# <th scope="col">userID</th> #}
+                <th scope="col">경기날짜</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for game in games %}
+              <tr>
+                <form method="post" action="{{url_for('dashboard.show_detail')}}">
+                  <th scope="row">{{ loop.index }}</th>
+                  <td hidden><input type="hidden" value="{{game['video_num']}}" name="video_num" /></td>
+                  {# <td><input type="hidden" value="{{game['userID']}}" name="userID" />{{game['userID']}}</td> #}
+                  <td><input type="submit" value="{{game['fileName']}}" name="fileName" class="border-none" /></td>
+                </form>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

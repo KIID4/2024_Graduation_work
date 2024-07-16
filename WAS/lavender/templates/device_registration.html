@@ -1,0 +1,115 @@
+{% extends "devices.html" %}
+
+
+<!-- title -->
+{% block title %}Lavender - device registration{% endblock %}
+
+
+<!-- content -->
+{% block content %}
+{# <h3>기기 등록하기</h3> #}
+
+{# wifi ssid, 보안방식(WPA, WPA2,WPA2-PSK,TKIP,AES 등), 네트워크 비밀번호, 사용자명, 기기별명 #}
+{# 추후에 카메라 제어 시, 
+  api서버 mqtt publish topic: /cam-control/사용자명/기기별명    
+                      payload: 암호화 => {'command': 'rec-start'} #} {# MQTT 암호화 방법 알아보기 #}
+
+{# DB 테이블 생성 => 기기serial(primary), 사용자명, 기기별명(한 사용자가 같은 별명의 기기 불가) #}
+
+{# 카메라RPI mqtt subscribe topic: /cam-control/사용자명/기기별명 #}
+<h3 align="center" class="text-light">Register Device</h3>
+<div class="py-3 vh-100 overflow-hidden">
+  <form method="post" action="{{url_for('cam_control.register_device')}}" class="py-3 d-flex gap-4 flex-column"
+    id="register-device-form" autocomplete="off">
+    <div class="">
+      <label for="InputNetworkSsid" class="form-label text-light">네트워크 이름</label><br>
+      <samp id="networkSsidHelp" class="form-text text-light small-text fw-bolder">
+        *기기가 인터넷에 연결되지 않은 경우 필수사항입니다.
+      </samp>
+      {% if session['network_ssid'] %}
+      <input name="network_ssid" type="text" class="form-control" id="InputNetworkSsid"
+        aria-describedby="networkSsidHelp" value="{{session['network_ssid']}}" required />
+      {% else %}
+      <input name="network_ssid" type="text" class="form-control" id="InputNetworkSsid"
+        aria-describedby="networkSsidHelp" required />
+      {% endif %}
+    </div>
+    <div class="">
+      <label for="InputNetworkSecurity" class="form-label text-light">네트워크 암호화방식</label><br>
+      <samp id="networkSecurityHelp" class="form-text text-light small-text fw-bolder">
+        *암호화 방식을 선택하세요.
+      </samp>
+      <select name="network_security" class="form-select" aria-label="Default select example" id="InputNetworkSecurity"
+        aria-describedby="networkSecurityHelp" required>
+        {% if session['network_security'] %}
+        <option value="{{session['network_security']}}" selected>{{session['network_security']}}</option>
+        {% else %}
+        <option value="WPA-PSK" selected>WPA-PSK</option>
+        {% endif %}
+        <option value="WPA2-PSK">WPA2-PSK</option>
+        <option value="WEP">WEP</option>
+        <option value="TKIP">TKIP</option>
+        <option value="AES">AES</option>
+      </select>
+    </div>
+
+
+
+
+    <!-- 비밀번호 재입력 -->
+    <div class="">
+      <label for="InputNetworkPassword" class="form-label mb-0 text-light">네트워크 비밀번호</label><br>
+      <div class="position-relative">
+        <input name="network_pw" type="password" class="form-control" id="InputNetworkPassword"
+          aria-describedby="networkPasswordHelp" minlength="8" required />
+        <span
+          class="input-group-addon position-absolute z-2 end-0 top-0 h-100 d-flex flex-column justify-content-center"
+          role="button" title="네트워크 비밀번호 보기" id="networkPwBtn">
+          <img src="../static/assets/images/hide.png" class="mx-2" width="25" height="25" aria-hidden="true" />
+        </span>
+      </div>
+    </div>
+
+    <!-- 비밀번호 show/hide -->
+    <script>
+      const PassBtn = document.querySelector('#networkPwBtn');
+      PassBtn.addEventListener('click', () => {
+        const input = document.querySelector('#InputNetworkPassword');
+        input.getAttribute('type') === 'password' ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+
+        if (input.getAttribute('type') === 'text') {
+          PassBtn.innerHTML = '<img src="../static/assets/images/show.png" class="mx-2" width="25" height="25" aria-hidden="true" />';
+        } else {
+          PassBtn.innerHTML = '<img src="../static/assets/images/hide.png" class="mx-2" width="25" height="25" aria-hidden="true" />';
+        }
+      });
+    </script>
+
+
+
+
+
+
+
+
+    {# <div class="">
+      <label for="InputNetworkPassword" class="form-label text-light">네트워크 비밀번호</label><br>
+      <samp id="networkPasswordHelp" class="form-text text-light small-text fw-bolder">
+        *8자 이상 입력하세요. (네트워크 ssid 입력 시 필수사항)
+      </samp>
+      <input name="network_pw" type="text" class="form-control" id="InputNetworkPassword"
+        aria-describedby="networkPasswordHelp" minlength="8" required />
+    </div> #}
+    <div class="">
+      <label for="InputDeviceAlias" class="form-label text-light">기기 별칭</label><br>
+      <samp id="deviceAliasHelp" class="form-text text-light small-text fw-bolder">
+        *2개 이상의 기기 보유 시 고유한 별칭으로 설정하세요.<br>
+        *영문자, 숫자, '-', '_'만 사용가능하며, 2~17자 내로 입력하세요.
+      </samp>
+      <input name="device_alias" type="text" class="form-control" id="InputDeviceAlias"
+        aria-describedby="deviceAliasHelp" minlength="2" maxlength="17" required />
+    </div>
+    <button type="submit" class="btn btn-primary">QR코드 생성</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "./bases/home.html" %}
+
+
+<!-- title -->
+{% block title %}Lavender - cam control{% endblock %}
+
+
+<!-- breadcrumb -->
+{% block breadcrumb %}
+<li aria-label="nav-item breadcrumb">
+  <ol class="nav-link breadcrumb m-auto">
+    <li class="breadcrumb-item pe-none">
+      <a href="#" class="text-decoration-none text-light">Menu</a>
+    </li>
+    <li class="dropdown breadcrumb-item active">
+      <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-light">Cam-Control</a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li>
+          <a class="dropdown-item" href="/dashboard">Dashboard</a>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</li>
+{% endblock %}
+
+
+<!-- content -->
+{% block content %}
+<div class="py-3 vh-100 d-flex gap-3 flex-column overflow-hidden">
+
+  <div class="row gap-3 px-3 px-md-3">
+    <div class="col-md-2">
+      <div class="card justify-content-center h-100">
+        <a href="{{url_for('cam_control.register_device')}}" class="text-decoration-none text-black h-100">
+          <div class="card-body d-flex align-items-center justify-content-around h-100">
+            <span class="card-title h3 mb-0 fw-bold">기기 등록</span>
+            <img src="../static/assets/images/plus.png" width="50" height="50" />
+          </div>
+        </a>
+      </div>
+      </form>
+    </div>
+
+    <!-- 보유 기기 목록 카드들 -->
+    {% for device in devices %}
+    <div class="col-md-2">
+      <div class="card justify-content-center">
+        <a href="#" class="text-decoration-none text-black">
+          <div class="card-body">
+            <form method="post" action="#">
+              <h5 class="card-title fw-bold">{{device['device_alias']}}</h5>
+              <p>{{ loop.index }}번째 기기입니다.</p>
+            </form>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

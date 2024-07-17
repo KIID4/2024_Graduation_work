@@ -1,0 +1,149 @@
+{% extends "./bases/login.html" %}
+
+{% block title %}Lavender - sign up{% endblock %}
+{% block content %}
+<h3 align="center" class="text-light">Sign Up</h3>
+<form method="POST" class="py-3 d-flex gap-4 flex-column overflow-hidden" autocomplete="off">
+  <!-- 아이디 -->
+  <div class="">
+    <label for="InputId1" class="form-text mb-0 text-light">아이디</label><br>
+    <samp id="idHelp" class="form-text text-light small-text fw-bolder">
+      *숫자,영문자,'-','_'만 가능하며, 4~15자 내로 입력하세요.
+      {# ex) hazel01 #}
+    </samp>
+    {% if session['sign-up-id'] %}
+    <input name="id" type="text" class="form-control" id="InputId1" aria-describedby="idHelp"
+      value="{{session['sign-up-id']}}" minlength="4" maxlength="15" required />
+    {% else %}
+    <input name="id" type="text" class="form-control" id="InputId1" aria-describedby="idHelp" minlength="4"
+      maxlength="15" required />
+    {% endif %}
+  </div>
+
+  <!-- 비밀번호 -->
+  <div class="">
+    <label for="InputPassword1" class="form-text mb-0 text-light">비밀번호</label><br>
+    <samp id="password1Help" class="form-text text-light small-text fw-bolder">
+      *공백 문자 제외 4자 이상 입력하세요.
+      {# ex) a2019!# #}
+    </samp>
+    <div class="position-relative">
+      {% if session['sign-up-password1'] %}
+      <input name="password1" type="password" class="form-control" id="InputPassword1" aria-describedby="password1Help"
+        value="{{session['sign-up-password1']}}" minlength="4" maxlength="200" required />
+      {% else %}
+      <input name="password1" type="password" class="form-control" id="InputPassword1" aria-describedby="password1Help"
+        minlength="4" maxlength="200" required />
+      {% endif %}
+      <span class="input-group-addon position-absolute z-2 end-0 top-0 h-100 d-flex flex-column justify-content-center"
+        role="button" title="비밀번호 보기" id="passBtn1">
+        <img src="../static/assets/images/hide.png" class="mx-2" width="25" height="25" aria-hidden="true" />
+      </span>
+    </div>
+  </div>
+
+  <!-- 비밀번호 재입력 -->
+  <div class="">
+    <label for="InputPassword2" class="form-label mb-0 text-light">비밀번호 재입력</label><br>
+    <div class="position-relative">
+      {% if session['sign-up-password2'] %}
+      <input name="password2" type="password" class="form-control" id="InputPassword2"
+        value="{{session['sign-up-password2']}}" minlength="4" maxlength="200" required />
+      {% else %}
+      <input name="password2" type="password" class="form-control" id="InputPassword2" minlength="4" maxlength="200"
+        required />
+      {% endif %}
+      <span class="input-group-addon position-absolute z-2 end-0 top-0 h-100 d-flex flex-column justify-content-center"
+        role="button" title="비밀번호 재입력 보기" id="passBtn2">
+        <img src="../static/assets/images/hide.png" class="mx-2" width="25" height="25" aria-hidden="true" />
+      </span>
+    </div>
+  </div>
+
+  <!-- 비밀번호 show/hide -->
+  <script>
+    const PassBtn = document.querySelector('#passBtn1');
+    const PassBtn2 = document.querySelector('#passBtn2');
+    PassBtn.addEventListener('click', () => {
+      const input = document.querySelector('#InputPassword1');
+      input.getAttribute('type') === 'password' ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+
+      if (input.getAttribute('type') === 'text') {
+        PassBtn.innerHTML = '<img src="../static/assets/images/show.png" class="mx-2" width="25" height="25" aria-hidden="true" />';
+      } else {
+        PassBtn.innerHTML = '<img src="../static/assets/images/hide.png" class="mx-2" width="25" height="25" aria-hidden="true" />';
+      }
+    });
+    PassBtn2.addEventListener('click', () => {
+      const input2 = document.querySelector('#InputPassword2');
+      input2.getAttribute('type') === 'password' ? input2.setAttribute('type', 'text') : input2.setAttribute('type', 'password');
+
+      if (input2.getAttribute('type') === 'text') {
+        PassBtn2.innerHTML = '<img src="../static/assets/images/show.png" class="mx-2" width="25" height="25" aria-hidden="true" />';
+      } else {
+        PassBtn2.innerHTML = '<img src="../static/assets/images/hide.png" class="mx-2" width="25" height="25" aria-hidden="true" />';
+      }
+    });
+  </script>
+
+  <!-- 닉네임 -->
+  <div class="">
+    <label for="Nickname1" class="form-label mb-0 text-light">닉네임</label><br>
+    <samp id="nicknameHelp" class="form-text text-light small-text fw-bolder">
+      *숫자,영문자,'-','_'만 가능하며, 2자 이상 입력하세요.
+      {# ex) hazelLy #}
+    </samp>
+    {% if session['sign-up-nickname'] %}
+    <input name="nickname" type="text" class="form-control" id="Nickname1" aria-describedby="nicknameHelp"
+      value="{{session['sign-up-nickname']}}" minlength="2" maxlength="80" required />
+    {% else %}
+    <input name="nickname" type="text" class="form-control" id="Nickname1" aria-describedby="nicknameHelp" minlength="2"
+      maxlength="80" required />
+    {% endif %}
+  </div>
+
+  <!-- 전화번호 -->
+  <div class="">
+    <label for="PhoneNumber1" class="form-label mb-0 text-light">전화번호</label><br>
+    <samp id="phoneNumberHelp" class="form-text text-light small-text fw-bolder">
+      *'-'를 제외하고 11자 입력하세요.
+      {# ex) 01020195252 (11자리) #}
+    </samp>
+    {% if session['sign-up-phoneNumber'] %}
+    <input name="phone-number" type="text" class="form-control" id="PhoneNumber1" aria-describedby="phoneNumberHelp"
+      value="{{session['sign-up-phoneNumber']}}" minlength="11" maxlength="11" required />
+    {% else %}
+    <input name="phone-number" type="text" class="form-control" id="PhoneNumber1" aria-describedby="phoneNumberHelp"
+      minlength="11" maxlength="11" required />
+    {% endif %}
+  </div>
+
+  <!-- 이메일 -->
+  <div class="">
+    <label for="Email1" class="form-label mb-0 text-light">이메일</label><br>
+    <samp id="emailHelp" class="form-text text-light small-text fw-bolder">
+      *올바른 이메일 형식으로 입력하세요.
+      {# ex) hazel01o1@gmail.com #}
+    </samp>
+    {% if session['sign-up-email'] %}
+    <input name="email" type="email" class="form-control" id="Email1" value="{{session['sign-up-email']}}"
+      maxlength="120" required />
+    {% else %}
+    <input name="email" type="email" class="form-control" id="Email1" maxlength="120" required />
+    {% endif %}
+  </div>
+
+  <!-- 약관 동의 -->
+  <div class="form-check">
+    {% if session['sign-up-agree'] %}
+    <input name="agree" type="checkbox" class="form-check-input" id="Check1" aria-describedby="emailHelp" checked
+      required />
+    {% else %}
+    <input name="agree" type="checkbox" class="form-check-input" id="Check1" aria-describedby="emailHelp" required />
+    {% endif %}
+    <label class="form-check-label text-light" for="Check1">개인정보 수집에 동의합니다.</label><br>
+  </div>
+
+  <button type="submit" action="{{url_for('auth.sign_up')}}" class="btn btn-primary">가입하기</button>
+</form>
+{% endblock %}

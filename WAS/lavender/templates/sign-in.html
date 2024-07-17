@@ -1,0 +1,22 @@
+{% extends "./bases/login.html" %}
+
+{% block title %}Lavender - sign in{% endblock %} {%
+block content %}
+<h3 align="center" class="text-light">Sign In</h3>
+<form method="post" action="{{url_for('auth.sign_in')}}" class="py-3 vh-100 d-flex gap-3 flex-column overflow-hidden" id="sign-in-form"
+  autocomplete="off">
+  <div class="">
+    <label for="InputId1" class="form-label text-light">아이디</label>
+    {% if session["sign-in-id"] %}
+    <input name="id" type="text" class="form-control" id="InputId1" value="{{session['sign-in-id']}}" />
+    {% else %}
+    <input name="id" type="text" class="form-control" id="InputId1" minlength="4" maxlength="15" />
+    {% endif %}
+  </div>
+  <div class="">
+    <label for="InputPassword1" class="form-label text-light">비밀번호</label>
+    <input name="password1" type="password" class="form-control" id="InputPassword1" />
+  </div>
+  <button type="submit" class="btn btn-primary ">로그인</button>
+</form>
+{% endblock %}

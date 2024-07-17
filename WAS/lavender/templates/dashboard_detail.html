@@ -1,0 +1,70 @@
+{% extends "./bases/home.html" %}
+
+
+<!-- title -->
+{% block title %}Lavender - detail{% endblock %}
+
+
+<!-- breadcrumb -->
+{% block breadcrumb %}
+<li aria-label="nav-item breadcrumb">
+  <ol class="nav-link breadcrumb m-auto">
+    <li class="breadcrumb-item pe-none">
+      <a href="#" class="text-decoration-none text-light">Menu</a>
+    </li>
+    <li class="dropdown breadcrumb-item active">
+      <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-light">Dashboard</a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><a class="dropdown-item" href="/devices">Cam-Control</a></li>
+      </ul>
+    </li>
+  </ol>
+</li>
+{% endblock %}
+
+
+<!-- content -->
+{% block content %}
+<div class="py-3 vh-100 d-flex gap-3 flex-column overflow-hidden">
+  <div class="row gap-4 px-3 px-md-3">
+    <!-- 경기 내용 테이블 카드 -->
+    <div class="col-md">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- 경기 내용 테이블 -->
+          <table class="table table-hover mb-0 mt-3">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">경기날짜</th>
+                {# <th scope="col">userID</th> #}
+                <th scope="col">re-ID</th> <!-- 사람 이미지 -->
+                <th scope="col">슛 시도 횟수</th>
+                <th scope="col">슛 성공 횟수</th>
+                <th scope="col">슛 성공률</th> <!-- 성공횟수/시도횟수 -->
+              </tr>
+            </thead>
+            <tbody>
+              {% for game in games %}
+              <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{game['fileName']}}</td>
+                {# <td>{{game['userID']}}</td> #}
+                <td>{{game['re_ID']}}</td>
+                <td>{{game['s_t']}}</td>
+                <td>{{game['s_s']}}</td>
+                <td>{{ "%.1f%%"|format(game['s_s']/game['s_t']*100|float) }}</td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "device_registration.html" %}
+
+
+<!-- title -->
+{% block title %}Lavender - qrcode{% endblock %}
+
+
+<!-- content -->
+{% block content %}
+<h3 align="center" class="text-light mb-3">Generated QRcode</h3>
+<div class="py-3 vh-100 container container-md d-flex flex-column gap-3 align-items-center overflow-hidden">
+  <div class="d-flex flex-column gap-3">
+    <img src="data:image/png;base64,{{qrcode_image}}" class="img-fluid" alt="QR Code" id="qrcode-image">
+    <div class="panel-group" id="accParent" role="tablist">
+      <div class="panel panel-default bg-light p-1">
+        <div class="panel-heading" role="tab">
+          <a role="button" data-bs-toggle="collapse" data-bs-parent="#accParent" aria-controls="accQRcodeData"
+            data-bs-target="#accQRcodeData" aria-expanded="false" class="text-decoration-none">▼ QR코드 정보 보기</a>
+        </div>
+        <div id="accQRcodeData" class="panel-collapse collapse p-2" role="tabpanel">
+          <div class="panel-body">
+            <table class="table table-hover table-sm table-responsive-md">
+              <tbody>
+                {% for key, value in qrcode_info.items() %}
+                <tr>
+                  <th scope="row">{{key}}</th>
+                  <td>{{value}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

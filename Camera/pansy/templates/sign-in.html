@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;521&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css"
+    />
+    <link
+      rel="stylesheet"
+      id="roboto-subset.css-css"
+      href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5"
+      type="text/css"
+      media="all"
+    />
+    <link rel="stylesheet" href="../static/login.css" />
+  </head>
+
+  <body>
+    <section class="vh-100 gradient-custom">
+      {% if login_failed %}
+      <div class="alert alert-danger" role="alert">
+        아이디 또는 비밀번호를 다시 확인해 주시기 바랍니다.
+      </div>
+      {% endif %}
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <form
+            method="post"
+            action="{{url_for('auth.sign_in')}}"
+            class="d-flex flex-column align-items-center"
+            id="sign-in-form"
+            autocomplete="off"
+          >
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card bg-dark text-white" style="border-radius: 1rem">
+                <div class="card-body p-5 text-center">
+                  <div class="mb-md-5 mt-md-4 pb-5">
+                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                    <p class="text-white-50 mb-5">
+                      Please enter your login and password!
+                    </p>
+
+                    <div
+                      data-mdb-input-init
+                      class="form-outline form-white mb-4"
+                    >
+                      <input
+                        name="id"
+                        type="text"
+                        class="form-control id-input"
+                        id="InputID"
+                        value=""
+                        minlength="4"
+                        maxlength="15"
+                      />
+                      <label class="form-label" for="typeEmailX">ID</label>
+                    </div>
+
+                    <div
+                      data-mdb-input-init
+                      class="form-outline form-white mb-4"
+                    >
+                      <input
+                        name="password"
+                        type="password"
+                        class="form-control password-input"
+                        id="InputPW"
+                        value=""
+                      />
+                      <label class="form-label" for="typePasswordX"
+                        >Password</label
+                      >
+                    </div>
+
+                    <button
+                      data-mdb-button-init
+                      data-mdb-ripple-init
+                      class="btn btn-outline-light btn-lg px-5"
+                      type="submit"
+                    >
+                      Login
+                    </button>
+                  </div>
+
+                  <!-- <div>
+                    <p class="mb-0">
+                      Don't have an account?
+                      <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
+                    </p>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <script
+      src="/docs/4.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

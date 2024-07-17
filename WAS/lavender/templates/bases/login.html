@@ -1,0 +1,25 @@
+{% extends "bases/base.html" %}
+
+
+<!-- title -->
+{% block title %}Lavender - login{% endblock %}
+
+
+<!-- topbar -->
+{% block topbar_content %}
+<div class="collapse navbar-collapse justify-content-end login-x align-items-center" id="navbarNav">
+  <ul class="navbar-nav">
+
+    <!-- sign in 버튼 -->
+    <li class="nav-item dark-navy-bg">
+      <a href="{{url_for('auth.sign_in')}}" class="nav-link px-2">Sign in</a>
+    </li>
+
+    <!-- sign up 버튼 -->
+    <li class="nav-item brick-bg">
+      <a href="{{url_for('auth.sign_up')}}" class="nav-link px-2">Sign up</a>
+    </li>
+
+  </ul>
+</div>
+{% endblock %}

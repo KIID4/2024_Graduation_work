@@ -25,7 +25,24 @@
 
 <!-- content -->
 {% block content %}
-<div class="py-3 vh-100 d-flex gap-3 flex-column overflow-hidden">
+<div class="py-3 vh-100 d-flex gap-4 flex-column overflow-hidden">
+
+  <div class="row px-3 px-md-3 align-self-start">
+    <!-- re-ID 이미지 카드 -->
+    {% for game in games %}
+    <div class="col-md player player{{loop.index}}">
+      <div class="card p-md-2">
+        <img class="card-img-top" height="200" src="{{url_for('dashboard.get_image', re_ID=game['re_ID'])}}"
+          alt="{{game['re_ID']}}" />
+        <div class="card-body">
+          <p class="card-text text-center fw-normal">{{game['re_ID']}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
   <div class="row gap-4 px-3 px-md-3">
     <!-- 경기 내용 테이블 카드 -->
     <div class="col-md">
@@ -47,11 +64,11 @@
             </thead>
             <tbody>
               {% for game in games %}
-              <tr>
+              <tr class="player player{{loop.index}}">
                 <th scope="row">{{ loop.index }}</th>
                 <td>{{game['fileName']}}</td>
                 {# <td>{{game['userID']}}</td> #}
-                <td>{{game['re_ID']}}</td>
+                <td> {{game['re_ID']}} </td>
                 <td>{{game['s_t']}}</td>
                 <td>{{game['s_s']}}</td>
                 <td>{{ "%.1f%%"|format(game['s_s']/game['s_t']*100|float) }}</td>
@@ -67,4 +84,22 @@
   </div>
 
 </div>
+<!--
+<script>
+  let index = 1;
+  let cur_player_els = document.querySelectorAll('.player' + index);
+  while (cur_player_els.length) {
+    cur_player_els.forEach(el => {
+      el.addEventListener('mouseenter', (event) => {
+        console.log("index: " + index);
+        el.style.backgroundColor = "#ffc107";
+      });
+      el.addEventListener('mouseleave', (event) => {
+        el.style.backgroundColor = "white";
+      });
+    });
+    cur_player_els = document.querySelectorAll('.player' + index);
+  }
+</script>
+-->
 {% endblock %}

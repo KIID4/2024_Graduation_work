@@ -1,3 +1,4 @@
+from datetime import timedelta
 from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from configs import flask_config
@@ -29,6 +30,18 @@ def register_router(flask_app: Flask):
     flask_app.register_blueprint(cam_control)
     flask_app.register_blueprint(dashboard)
 
+    # app의 request/response들과 매번 함께 실행할 함수 정의
+    """
+    @flask_app.before_request
+    def before_my_request():
+        print("before my request")
+
+    @flask_app.after_request
+    def after_my_request(res):
+        print("after my request", res.status_code)
+        return res
+    """
+
 
 def create_app():
     app = Flask(
@@ -57,6 +70,8 @@ def create_app():
         return redirect(url_for("views.index"))
 
     migrate = Migrate(app, db, render_as_batch=True)
+
+    # app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=60)
 
     return app
 

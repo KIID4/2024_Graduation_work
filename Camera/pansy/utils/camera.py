@@ -43,7 +43,9 @@ class Camera(SingletonInstane):
     def basic_settings(self):
         load_dotenv()
         self.user_name = os.environ.get("DEVICE_OWNER")  # 사용자명 초기화
-        self.video_dir = os.environ.get("VIDEO_DIR")  # 비디오 파일의 디렉터리 경로 초기화
+        self.video_dir = (
+            "/home/<user>/<folder>/static/video/"  # 비디오 파일의 디렉터리 경로 초기화
+        )
         self.file_name_extension = ".mp4"  # 비디오 파일의 확장자 초기화
 
         # 해상도 설정

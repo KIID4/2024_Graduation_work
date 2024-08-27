@@ -1,12 +1,14 @@
 from datetime import datetime
 import threading
 from flask import Blueprint, redirect, url_for
+from flask_login import login_required
 from utils.camera import Camera
 
 stop_rec = Blueprint("stop_rec", __name__)
 
 
 @stop_rec.route("/stop_rec", methods=["GET", "POST"])
+@login_required
 def stop_recording():
     print("\n\n녹화 중지!\n\n")
     cam2 = Camera.instance()

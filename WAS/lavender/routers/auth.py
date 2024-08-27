@@ -25,19 +25,14 @@ def sign_in():
         session["sign-in-id"] = user_id
         user_password1 = request.form.get("password1")
 
-        # search User in database & compare password
         user = User.query.filter_by(user_id=user_id).first()
         if user:
             if check_password_hash(user.user_password, user_password1):
-                if session.pop(user_id, None):
-                    flash("동시접속을 차단합니다.", category="error")
-                    return redirect(url_for("auth.logout"))
-                else:
-                    # login_user(user, remember=True)  # 내용 기억하기
-                    login_user(user)
-                    flash("로그인 성공", category="success")
-                    print("로그인 성공!")
-                    return redirect(url_for("dashboard.show_dashboard"))
+                # login_user(user, remember=True)  # 내용 기억하기
+                login_user(user)
+                # flash("로그인 성공", category="success")
+                print("로그인 성공!")
+                return redirect(url_for("dashboard.show_dashboard"))
             else:
                 flash("아이디 혹은 비밀번호가 틀렸습니다.", category="error")
         else:
@@ -111,7 +106,6 @@ def sign_up():
                 user_email=user_email,
             )
             db.session.add(new_user)
-            db.session.commit()
 
             session.pop("sign-up-id", None)
             session.pop("sign-up-password1", None)
@@ -120,6 +114,7 @@ def sign_up():
             session.pop("sign-up-phoneNumber", None)
             session.pop("sign-up-email", None)
             session.pop("sign-up-agree", None)
+            db.session.commit()
             flash("회원가입이 완료되었습니다.", category="success")  # Create User -> DB
             return redirect(url_for("views.index"))
 

@@ -1,12 +1,18 @@
 from flask import Blueprint, Response, g, render_template, send_file
+from flask_login import login_required
 from utils.camera import Camera
 
 video_feed = Blueprint("video_feed", __name__)
 
 
 @video_feed.route("/streaming", methods=["GET"])
+@login_required
 def streaming():
     print("\n\n스트리밍!\n\n")
+    """인증
+    if not check_auth():
+        return jsonify({'message': 'Unauthorized'}), 401
+    """
 
     cam3 = Camera.instance()
 

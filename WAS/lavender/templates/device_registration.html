@@ -21,6 +21,7 @@
 <div class="py-3 vh-100 overflow-hidden">
   <form method="post" action="{{url_for('cam_control.register_device')}}" class="py-3 d-flex gap-4 flex-column"
     id="register-device-form" autocomplete="off">
+
     <div class="">
       <label for="InputNetworkSsid" class="form-label text-light">네트워크 이름</label><br>
       <samp id="networkSsidHelp" class="form-text text-light small-text fw-bolder">
@@ -28,19 +29,20 @@
       </samp>
       {% if session['network_ssid'] %}
       <input name="network_ssid" type="text" class="form-control" id="InputNetworkSsid"
-        aria-describedby="networkSsidHelp" value="{{session['network_ssid']}}" required />
+        aria-describedby="networkSsidHelp" value="{{session['network_ssid']}}" />
       {% else %}
       <input name="network_ssid" type="text" class="form-control" id="InputNetworkSsid"
-        aria-describedby="networkSsidHelp" required />
+        aria-describedby="networkSsidHelp" />
       {% endif %}
     </div>
+
     <div class="">
       <label for="InputNetworkSecurity" class="form-label text-light">네트워크 암호화방식</label><br>
       <samp id="networkSecurityHelp" class="form-text text-light small-text fw-bolder">
         *암호화 방식을 선택하세요.
       </samp>
       <select name="network_security" class="form-select" aria-label="Default select example" id="InputNetworkSecurity"
-        aria-describedby="networkSecurityHelp" required>
+        aria-describedby="networkSecurityHelp">
         {% if session['network_security'] %}
         <option value="{{session['network_security']}}" selected>{{session['network_security']}}</option>
         {% else %}
@@ -53,15 +55,11 @@
       </select>
     </div>
 
-
-
-
-    <!-- 비밀번호 재입력 -->
     <div class="">
       <label for="InputNetworkPassword" class="form-label mb-0 text-light">네트워크 비밀번호</label><br>
       <div class="position-relative">
         <input name="network_pw" type="password" class="form-control" id="InputNetworkPassword"
-          aria-describedby="networkPasswordHelp" minlength="8" required />
+          aria-describedby="networkPasswordHelp" minlength="8" />
         <span
           class="input-group-addon position-absolute z-2 end-0 top-0 h-100 d-flex flex-column justify-content-center"
           role="button" title="네트워크 비밀번호 보기" id="networkPwBtn">
@@ -70,7 +68,6 @@
       </div>
     </div>
 
-    <!-- 비밀번호 show/hide -->
     <script>
       const PassBtn = document.querySelector('#networkPwBtn');
       PassBtn.addEventListener('click', () => {
@@ -85,21 +82,6 @@
       });
     </script>
 
-
-
-
-
-
-
-
-    {# <div class="">
-      <label for="InputNetworkPassword" class="form-label text-light">네트워크 비밀번호</label><br>
-      <samp id="networkPasswordHelp" class="form-text text-light small-text fw-bolder">
-        *8자 이상 입력하세요. (네트워크 ssid 입력 시 필수사항)
-      </samp>
-      <input name="network_pw" type="text" class="form-control" id="InputNetworkPassword"
-        aria-describedby="networkPasswordHelp" minlength="8" required />
-    </div> #}
     <div class="">
       <label for="InputDeviceAlias" class="form-label text-light">기기 별칭</label><br>
       <samp id="deviceAliasHelp" class="form-text text-light small-text fw-bolder">
@@ -107,8 +89,9 @@
         *영문자, 숫자, '-', '_'만 사용가능하며, 2~17자 내로 입력하세요.
       </samp>
       <input name="device_alias" type="text" class="form-control" id="InputDeviceAlias"
-        aria-describedby="deviceAliasHelp" minlength="2" maxlength="17" required />
+        aria-describedby="deviceAliasHelp" minlength="2" maxlength="17" />
     </div>
+
     <button type="submit" class="btn btn-primary">QR코드 생성</button>
   </form>
 </div>

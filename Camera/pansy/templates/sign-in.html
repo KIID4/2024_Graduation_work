@@ -8,13 +8,21 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@500;521&display=swap"
     />
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    /> -->
     <link
       rel="stylesheet"
+      href="{{ url_for('static', filename='/css/font-awesome.css') }}"
+    />
+    <!-- <link
+      rel="stylesheet"
       href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/bootstrap.css') }}"
     />
     <link
       rel="stylesheet"
@@ -23,7 +31,10 @@
       type="text/css"
       media="all"
     />
-    <link rel="stylesheet" href="../static/login.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/css/login.css') }}"
+    />
   </head>
 
   <body>
@@ -58,13 +69,17 @@
                       <input
                         name="id"
                         type="text"
-                        class="form-control id-input"
+                        class="form-control form-control-lg active id-input"
                         id="InputID"
                         value=""
                         minlength="4"
                         maxlength="15"
+                        style="
+                          border-bottom: 1px solid white;
+                          box-sizing: border-box;
+                        "
                       />
-                      <label class="form-label" for="typeEmailX">ID</label>
+                      <label class="form-label" for="inputID">ID</label>
                     </div>
 
                     <div
@@ -74,13 +89,15 @@
                       <input
                         name="password"
                         type="password"
-                        class="form-control password-input"
+                        class="form-control form-control-lg active password-input"
                         id="InputPW"
                         value=""
+                        style="
+                          border-bottom: 1px solid white;
+                          box-sizing: border-box;
+                        "
                       />
-                      <label class="form-label" for="typePasswordX"
-                        >Password</label
-                      >
+                      <label class="form-label" for="inputPW">Password</label>
                     </div>
 
                     <button
@@ -106,10 +123,5 @@
         </div>
       </div>
     </section>
-    <script
-      src="/docs/4.0/dist/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>

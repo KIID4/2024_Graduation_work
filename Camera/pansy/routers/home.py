@@ -1,12 +1,18 @@
 from flask import Blueprint, render_template, abort, request, redirect, url_for, session
+from flask_login import login_required
 from jinja2 import TemplateNotFound
 from utils.camera import Camera
-import os
 
 home = Blueprint("home", __name__)
 
 
+@home.route("/", methods=["GET"])
+def index():
+    return redirect(url_for("auth.sign_in"))
+
+
 @home.route("/home", methods=["GET", "POST"])
+@login_required
 def go_home():
     print("\n\n홈!\n\n")
 

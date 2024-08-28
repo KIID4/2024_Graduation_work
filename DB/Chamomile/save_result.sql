@@ -1,0 +1,2 @@
+game_info_query = "INSERT INTO game_info (video_num, fileName, userID, image_path, re_ID, s_t, s_s) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+user_info_query = "INSERT INTO user_info (userID, video_num) VALUES (%s, %s)"

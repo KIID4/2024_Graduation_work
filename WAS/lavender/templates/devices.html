@@ -5,22 +5,15 @@
 {% block title %}Lavender - cam control{% endblock %}
 
 
-<!-- breadcrumb -->
-{% block breadcrumb %}
-<li aria-label="nav-item breadcrumb">
-  <ol class="nav-link breadcrumb m-auto">
-    <li class="breadcrumb-item pe-none">
-      <a href="#" class="text-decoration-none text-light">Menu</a>
-    </li>
-    <li class="dropdown breadcrumb-item active">
-      <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-light">Cam-Control</a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li>
-          <a class="dropdown-item" href="/dashboard">Dashboard</a>
-        </li>
-      </ul>
-    </li>
-  </ol>
+<!-- menus -->
+{% block menus %}
+<!-- 페이지 선택 dropdown -->
+<li class="dropdown nav-item active collapse show multi-collapse" id="multiple3">
+  <a href="#" data-bs-toggle="dropdown" aria-expanded="false"
+    class="text-light nav-link ps-0 dropdown-toggle">Cam-Control</a>
+  <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+    <li><a class="dropdown-item nav-link" href="/dashboard">Dashboard</a></li>
+  </ul>
 </li>
 {% endblock %}
 

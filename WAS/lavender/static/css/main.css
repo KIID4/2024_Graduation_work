@@ -35,10 +35,6 @@ label {
   background-size: cover;
 }
 
-/* 로그인 o 상태 */
-.login-o {
-}
-
 .search-form .form-group {
   float: right !important;
   transition: all 0.35s, border-radius 0s;
@@ -102,6 +98,15 @@ label {
 #play-search {
   max-width: 150px;
   min-width: fit-content;
+}
+
+/* menus */
+.menus {
+  width: 100%;
+  text-align: center;
+}
+.menus a:hover {
+  background-color: #ab3211;
 }
 
 /* qrcode */

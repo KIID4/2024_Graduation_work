@@ -5,32 +5,13 @@
 {% block title %}Lavender - detail{% endblock %}
 
 
-<!-- breadcrumb -->
-{% block breadcrumb %}
-<li aria-label="nav-item breadcrumb">
-  <ol class="nav-link breadcrumb m-auto">
-    <li class="breadcrumb-item pe-none">
-      <a href="#" class="text-decoration-none text-light">Menu</a>
-    </li>
-    <li class="dropdown breadcrumb-item active">
-      <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-light">Dashboard</a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="/devices">Cam-Control</a></li>
-      </ul>
-    </li>
-  </ol>
-</li>
-{% endblock %}
-
-
 <!-- content -->
 {% block content %}
 <div class="py-3 vh-100 d-flex gap-4 flex-column overflow-hidden">
-
-  <div class="row px-3 px-md-3 align-self-start">
+  <div class="d-flex gap-3 px-3 px-md-3">
     <!-- re-ID 이미지 카드 -->
     {% for game in games %}
-    <div class="col-md player player{{loop.index}}">
+    <div class="player player{{loop.index}}">
       <div class="card p-md-2">
         <img class="card-img-top" height="200" src="{{url_for('dashboard.get_image', re_ID=game['re_ID'])}}"
           alt="{{game['re_ID']}}" />

@@ -5,50 +5,66 @@
 {% block title %}Lavender - home{% endblock %}
 
 
+{% block profile %}
+<!-- (st) User -->
+<div class="nav-item dropdown ms-auto px-3 inline">
+  <a href="#" class="nav-link d-flex align-items-center text-light text-decoration-none dropdown-toggle"
+    id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+    <img src="../../static/assets/images/hazel.png" alt="hugenerd" width="30" height="30" class="rounded-circle" />
+    <span class="d-none d-sm-inline mx-1">{{current_user.get_id()}}</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+    {# <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li> 
+    <li>
+      <a class="dropdown-item nav-link" href="#">Profile</a>
+    </li>
+    <li>
+      <hr class="dropdown-divider" />
+    </li>
+    <li>#}
+    <a href="{{url_for('auth.logout')}}" class="dropdown-item nav-link">Log Out</a>
+    </li>
+  </ul>
+</div>
+<!-- User (fin) -->
+{% endblock %}
+
+
 <!-- topbar -->
 {% block topbar_content %}
-<div class="collapse navbar-collapse login-o align-items-center" id="navbarNav">
-  <ul class="navbar-nav align-items-center justify-content-between w-100">
-    <!-- Menu / Selection1 / Selection2 -->
-    {% block breadcrumb %}
-    <li aria-label="breadcrumb">
-      <ol class="breadcrumb m-auto">
-        <li class="nav-item breadcrumb-item pe-none">
-          <a class="text-decoration-none text-light nav-link">Menu</a>
-        </li>
-        <li class="dropdown breadcrumb-item active">
-          <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-light nav-item">Dashboard</a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow nav-item">
-            <li><a class="dropdown-item nav-link" href="/devices">Cam-Control</a></li>
-          </ul>
-        </li>
-      </ol>
+<div class="collapse navbar-collapse login-o align-items-center multi-collapse" id="navbarNav">
+  <ul class="navbar-nav align-items-center w-100">
+
+    <!-- Menu(disabled) -->
+    <li class="nav-item">
+      <a class="disabled nav-link pe-0">Menu</a>
+    </li>
+
+    <li class="nav-item collapse show multi-collapse" id="multiple2">
+      <a class="nav-link">/</a>
+    </li>
+
+    <!-- menus -->
+    {% block menus %}
+    <!-- 페이지 선택 dropdown -->
+    <li class="dropdown nav-item active collapse show multi-collapse" id="multiple3">
+      <a href="#" data-bs-toggle="dropdown" aria-expanded="false"
+        class="text-light nav-link ps-0 dropdown-toggle">Dashboard</a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><a class="dropdown-item nav-link" href="/devices">Cam-Control</a></li>
+      </ul>
     </li>
     {% endblock %}
 
-    <!-- (st) User -->
-    <li class="nav-item dropdown px-2">
-      <a href="#" class="nav-link d-flex align-items-center text-light text-decoration-none dropdown-toggle"
-        id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="../../static/assets/images/hazel.png" alt="hugenerd" width="30" height="30" class="rounded-circle" />
-        <span class="d-none d-sm-inline mx-1">{{current_user.get_id()}}</span>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        {# <li>
-            <a class="dropdown-item" href="#">Settings</a>
-          </li> #}
-        <li>
-          <a class="dropdown-item" href="#">Profile</a>
-        </li>
-        <li>
-          <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <a href="{{url_for('auth.logout')}}" class="dropdown-item">Log Out</a>
-        </li>
-      </ul>
+    <!-- hamburger버튼 활성화 시에 -->
+    <li class="nav-item collapse multi-collapse menus" id="multiple4">
+      <a class="nav-link" href="/dashboard">Dashboard</a>
     </li>
-    <!-- User (fin) -->
+    <li class="nav-item collapse multi-collapse menus" id="multiple5">
+      <a class="nav-link" href="/devices">Cam-Control</a>
+    </li>
   </ul>
 </div>
 {% endblock %}

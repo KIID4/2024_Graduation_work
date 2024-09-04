@@ -5,30 +5,12 @@
 {% block title %}Lavender - dashboard{% endblock %}
 
 
-<!-- breadcrumb -->
-{% block breadcrumb %}
-<li aria-label="nav-item breadcrumb">
-  <ol class="breadcrumb m-auto">
-    <li class="breadcrumb-item pe-none">
-      <a href="#" class="text-decoration-none text-light">Menu</a>
-    </li>
-    <li class="dropdown breadcrumb-item active">
-      <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-light nav-link">Dashboard</a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item nav-link" href="/devices">Cam-Control</a></li>
-      </ul>
-    </li>
-  </ol>
-</li>
-{% endblock %}
-
-
 <!-- content -->
 {% block content %}
 <div class="py-3 vh-100 d-flex gap-3 flex-column overflow-hidden">
-  <div class="row gap-4 px-3 px-md-3 justify-content-around">
+  <div class="row gap-3 px-3 px-md-3 justify-content-around">
     <!-- 전체 경기 평균 그래프 카드 -->
-    <div class="col-md-8">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">전체 경기 평균</h5>
@@ -40,7 +22,7 @@
 
 
     <!-- 경기 기록 테이블 카드 -->
-    <div class="col-md-3">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-body">
           {# <!-- 검색하기 -->

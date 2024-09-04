@@ -34,14 +34,18 @@
       {# BasketBall-Ai #}
     </a>
 
-    <!-- 작은 화면 toggle 버튼 (responsive) -->
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
     <!-- topbar_content -->
     {% block topbar_content %}{% endblock %}
+
+    <!-- profile -->
+    {% block profile %}{% endblock %}
+
+    <!-- 작은 화면 toggle 버튼 (responsive) -->
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse"
+      aria-controls="navbarNav multiple1 multiple2 multiple3 multiple4 multiple5" aria-expanded="false"
+      aria-label="Toggle navigation" id="hamburgerBtn">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </nav>
 
   <!-- (st) Message Flashing -->
